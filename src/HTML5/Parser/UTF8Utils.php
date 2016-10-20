@@ -80,7 +80,7 @@ class UTF8Utils
         /*
          * One leading U+FEFF BYTE ORDER MARK character must be ignored if any are present.
          */
-        $data = UTF8::clean($data, true);
+        $data = UTF8::clean($data, true, true);
 
         return $data;
     }

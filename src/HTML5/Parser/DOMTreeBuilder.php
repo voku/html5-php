@@ -185,8 +185,17 @@ class DOMTreeBuilder implements EventHandler
      */
     protected $quirks = true;
 
+    /**
+     * @var array
+     */
     protected $errors = array();
 
+    /**
+     * DOMTreeBuilder constructor.
+     *
+     * @param bool $isFragment
+     * @param array $options
+     */
     public function __construct($isFragment = false, array $options = array())
     {
         $this->options = $options;

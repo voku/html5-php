@@ -234,7 +234,7 @@ class StringInputStreamTest extends \Masterminds\HTML5\Tests\TestCase
         // C1 Controls
         $this->invalidParseErrorTestHandler("\xC2\x80", 1, 'U+0080 (C1 control)', "\xC2\x80");
         $this->invalidParseErrorTestHandler("\xC2\x9F", 1, 'U+009F (C1 control)', "\xC2\x9F");
-        $this->invalidParseErrorTestHandler("\xC2\xA0", 0, 'U+00A0 (first codepoint above highest C1 control)', "\xC2\xA0");
+        $this->invalidParseErrorTestHandler("\xC2\xA0", 0, 'U+00A0 (first codepoint above highest C1 control)', " ");
 
         // Charcters surrounding surrogates
         $this->invalidParseErrorTestHandler("\xED\x9F\xBF", 0, 'U+D7FF (one codepoint below lowest surrogate codepoint)', "\xED\x9F\xBF");

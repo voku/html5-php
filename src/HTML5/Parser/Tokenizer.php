@@ -240,7 +240,15 @@ class Tokenizer
         $tok = $this->scanner->current();
 
         $caseSensitive = !Elements::isHtml5Element($this->untilTag);
-        while ($tok !== false && !($tok === '<' && ($this->sequenceMatches($sequence, $caseSensitive)))) {
+        while (
+            $tok !== false
+            &&
+            !(
+                $tok === '<'
+                &&
+                $this->sequenceMatches($sequence, $caseSensitive)
+            )
+        ) {
             if ($tok === '&') {
                 $txt .= $this->decodeCharacterReference();
                 $tok = $this->scanner->current();

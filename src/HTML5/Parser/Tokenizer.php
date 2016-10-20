@@ -370,7 +370,11 @@ class Tokenizer
         // > -> parse error
         // EOF -> parse error
         // -> parse error
-        if (!ctype_alpha($tok)) {
+        if (
+            !ctype_alpha($tok)
+            &&
+            UTF8::clean($tok) === $tok // non UTF-8 part
+        ) {
             $this->parseError("Expected tag name, got '%s'", $tok);
             if ($tok === "\0" || $tok === false) {
                 return false;
@@ -401,7 +405,12 @@ class Tokenizer
     protected function tagName()
     {
         $tok = $this->scanner->current();
-        if (!ctype_alpha($tok)) {
+
+        if (
+            !ctype_alpha($tok)
+            &&
+            UTF8::clean($tok) === $tok // non UTF-8 part
+        ) {
             return false;
         }
 
@@ -427,7 +436,10 @@ class Tokenizer
         if ($selfClose) {
             $this->events->endTag($name);
         } elseif (is_int($mode)) {
+
+            // DEBUG
             // fprintf(STDOUT, "Event response says move into mode %d for tag %s", $mode, $name);
+
             $this->setTextMode($mode, $name);
         }
 

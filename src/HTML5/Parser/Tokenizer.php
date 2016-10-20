@@ -406,6 +406,10 @@ class Tokenizer
     {
         $tok = $this->scanner->current();
 
+        // DEBUG
+        var_dump(UTF8::clean($tok));
+        var_dump($tok);
+
         if (
             !ctype_alpha($tok)
             &&
@@ -415,7 +419,7 @@ class Tokenizer
         }
 
         // We know this is at least one char.
-        $name = $this->scanner->charsUntil("<> \n\r\t\"'=/\\.?%&*");
+        $name = $this->scanner->charsUntil("<>\n\f\t \"'=/\\.?%&*");
         $name = $this->mode === self::CONFORMANT_XML ? $name : UTF8::strtolower($name);
         $attributes = array();
         $selfClose = false;

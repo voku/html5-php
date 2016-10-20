@@ -148,7 +148,7 @@ class DOMTreeBuilder implements EventHandler
     protected $stack = array();
 
     /**
-     * @var \DOMDocumentFragment
+     * @var \DOMDocumentFragment|\DOMElement
      */
     protected $current; // Pointer in the tag hierarchy.
 
@@ -296,7 +296,7 @@ class DOMTreeBuilder implements EventHandler
     public function startTag($name, $attributes = array(), $selfClosing = false)
     {
         // DEBUG
-        var_dump($name);
+        //var_dump($name);
 
         $lname = $this->normalizeTagName($name);
 
@@ -672,6 +672,7 @@ class DOMTreeBuilder implements EventHandler
         // it sees fit.
         if (isset($this->processor)) {
             $res = $this->processor->process($this->current, $name, $data);
+            /** @noinspection IsEmptyFunctionUsageInspection */
             if (!empty($res)) {
                 $this->current = $res;
             }
@@ -706,6 +707,11 @@ class DOMTreeBuilder implements EventHandler
         return $name;
     }
 
+    /**
+     * @param $name
+     *
+     * @throws \Exception
+     */
     protected function quirksTreeResolver($name)
     {
         throw new \Exception("Not implemented.");
